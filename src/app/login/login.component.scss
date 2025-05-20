@@ -1,0 +1,79 @@
+/* Estilos para el contenedor del login */
+#myVideo {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: 0;
+    }
+.contenedor-login {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      z-index: 1;
+      display: flex;
+      align-items: center;
+    
+      .card-login {
+        border-radius: 10px;
+        padding: 20px;
+        border: none !important;
+        box-shadow: none;
+    
+        // Ajustar tamaño
+        height: auto;
+        width: 500px;
+    
+        .titulo {
+          font-size: 24px;
+          margin-bottom: 20px;
+          color: #ffffff;
+          font-style: Montserrat;
+        }
+    
+        .form-group {
+          margin-bottom: 15px;
+    
+          input {
+            width: 100%;
+            padding: 10px;
+            margin: 4px 0;
+            display: inline-block;
+            border: none;
+            border-bottom: 2px solid #ccc;
+            border-radius: 0;
+            background: transparent;
+            box-sizing: border-box;
+            color: #ffffff; // Color del texto blanco
+            &::placeholder {
+              color: #ffffff; // Color del placeholder blanco
+            }
+    
+            &:focus {
+              border-bottom: 2px solid #000000;
+              outline: none;
+            }
+          }
+        }
+    
+        .btn-login {
+          background-color: rgba(0, 0, 0, 0.1);
+          color: white;
+          padding: 10px 20px;
+          margin: 10px 0;
+          border: none;
+          cursor: pointer;
+          border-radius: 5px;
+          width: 100%;
+          border-color: #ccc;
+    
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.5); // Fondo negro translúcido al pasar el mouse
+            color: white;
+          }
+        }
+      }
+    }
+    

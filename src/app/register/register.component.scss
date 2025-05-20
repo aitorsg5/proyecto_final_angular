@@ -1,0 +1,82 @@
+//commit
+#myVideo {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: 0;
+    }
+.contenedor-register {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); // Centrando tanto vertical como horizontalmente
+      z-index: 1;
+      display: flex;
+      align-items: center;
+    
+      .card-register {
+        border-radius: 10px;
+        padding: 20px;
+        border: none !important;
+        box-shadow: none;
+        backdrop-filter: blur(30px); // Añadir efecto de difuminado
+        background: rgba(255, 255, 255, 0.2); // Fondo transparente
+    
+        // Ajustar tamaño
+        height: auto;
+        width: 500px;
+    
+        .titulo {
+          font-size: 24px;
+          margin-bottom: 20px;
+          color: #ffffff;
+          font-family: sans-serif; // Usar 'font-family' en lugar de 'font-style'
+        }
+    
+        .form-group {
+          margin-bottom: 15px;
+    
+          input {
+            width: 100%;
+            padding: 10px;
+            margin: 4px 0;
+            display: inline-block;
+            border: none;
+            border-bottom: 2px solid #ccc;
+            border-radius: 0;
+            background: transparent;
+            box-sizing: border-box;
+            color: #ffffff; // Color del texto blanco
+    
+            &::placeholder {
+              color: #ffffff; // Color del placeholder blanco
+            }
+    
+            &:focus {
+              border-bottom: 2px solid #000000;
+              outline: none;
+            }
+          }
+        }
+    
+        .btn-login {
+          background-color: rgba(0, 0, 0, 0.1);
+          color: white;
+          padding: 10px 20px;
+          margin: 10px 0;
+          border: none;
+          cursor: pointer;
+          border-radius: 5px;
+          width: 100%;
+          border-color: #ccc;
+    
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.5); // Fondo negro translúcido al pasar el mouse
+            color: white;
+          }
+        }
+      }
+    }
+    

@@ -1,0 +1,22 @@
+<div class="contenedor-login">
+  <div class="card-login">
+    <div class="titulo">Bienvenido a Audi</div>
+    <form>
+      <div class="form-group">
+        <input type="email" name="email" placeholder="Correo electrónico" [(ngModel)]="usuarioInput" required>
+      </div>
+      <div class="form-group">
+        <input type="password" name="password" placeholder="Contraseña" [(ngModel)]="passwordInput" required>
+      </div>
+      <button type="button" class="btn-login" (click)="verificarCredenciales()">Iniciar Sesión</button>
+      <button type="button" class="btn-login" (click)="irARegistro()">Registrarse</button>
+    </form>
+  </div>
+</div>
+
+<div class="video">
+  <video autoplay muted loop id="myVideo">
+    <source src="../../assets/video/Audi_R8.mp4" type="video/mp4">
+    Tu navegador no soporta videos HTML5.
+  </video>
+</div>

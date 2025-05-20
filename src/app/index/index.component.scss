@@ -1,0 +1,177 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.video-container1 {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+     height: 50%;
+    margin: 0 auto;
+  }
+  
+  .video-container1 video {
+    width: 100%;
+    height: 50%;
+    display: block;
+  }
+  #myVideo1 {
+    object-fit: cover;
+    width: 100%;
+    height: 90vh;
+}
+
+  
+
+.slider-container {
+  width: 100%;
+  height: auto; /* Se ajusta automáticamente */
+  overflow: hidden; /* Oculta imágenes fuera del contenedor */
+  position: relative;
+  margin: auto;
+  display: grid;
+  place-items: center;
+}
+
+.slider {
+  display: flex;
+  flex-wrap: nowrap; /* Evita que las imágenes se junten */
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+}
+
+.imagen-audi {
+  height:80vh; /* Ajusta la altura */
+  width: 100%;
+  object-fit: cover; /* Ajusta sin distorsionar */
+  flex: 0 0 100%; /* Cada imagen ocupa 100% del slider */
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 50px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.0);
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+$primary-color: #f0f0f0;
+$secondary-color: #333;
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: $primary-color;
+}
+
+.filters {
+    display: flex;
+    justify-content: start;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    
+    button {
+        margin-left: 10px;
+        background: transparent;
+        border: 1px solid $secondary-color;
+        padding: 5px 10px;
+        cursor: pointer;
+        &:hover {
+            background-color: #e0e0e0;
+        }
+    }
+
+    label {
+        margin-left: 5px;
+    }
+}
+
+.car-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+
+    .car {
+        text-align: center;
+        margin: 15px;
+        background: white;
+        border: 1px solid $secondary-color;
+        border-radius: 5px;
+        padding: 10px;
+        transition: transform 0.2s;
+
+        &:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        h3 {
+            margin: 10px 0 5px;
+        }
+
+        p {
+            color: $secondary-color;
+        }
+    }
+}
+$primary-color: #333;
+$bg-color: #f9f9f9;
+$card-bg: white;
+$card-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+
+    h1 {
+        color: $primary-color;
+        margin-bottom: 30px;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+
+        .card {
+            background-color: $card-bg;
+            box-shadow: $card-shadow;
+            border-radius: 8px;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: auto;
+            }
+
+            p {
+                padding: 15px;
+                margin: 0;
+                font-size: 1rem;
+                color: $primary-color;
+                text-align: center;
+            }
+        }
+    }
+}

@@ -1,0 +1,91 @@
+$primary-color: #f0f0f0;
+$secondary-color: #ffffff;
+$text-color: #333;
+$button-bg: #000;
+$button-color: #fff;
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: $primary-color;
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 25%;
+    padding: 20px;
+    background-color: $secondary-color;
+    
+    h2, h3 {
+        margin: 10px 0;
+    }
+
+    .modelo-buttons, .tipo-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        button {
+            border: 1px solid #ccc;
+            background: transparent;
+            padding: 10px;
+            cursor: pointer;
+            &:hover {
+                background-color: $button-bg;
+                color: $button-color;
+            }
+        }
+    }
+}
+
+.modelos-display {
+    width: 75%;
+    padding: 20px;
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    .modelo-card {
+        background: $secondary-color;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 15px;
+        margin-bottom: 20px;
+        text-align: center;
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        h3 {
+            margin: 10px 0;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px 15px;
+            background-color: $button-bg;
+            color: $button-color;
+            border: none;
+            cursor: pointer;
+
+            &:hover {
+                background-color: darken($button-bg, 10%);
+            }
+        }
+
+        .stock {
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+    }
+}

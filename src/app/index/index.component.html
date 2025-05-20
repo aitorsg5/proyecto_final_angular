@@ -1,0 +1,100 @@
+<app-cabecera></app-cabecera>
+<div class="video-container1">
+    <video id="myVideo1" autoplay muted loop style="cursor: pointer;"></video>
+  </div>
+
+
+    <div class="filters">
+        <input type="checkbox" id="todos" checked>
+        <label for="todos">Todos</label>
+        <button>100% eléctrico</button>
+        <button>Híbrido enchufable</button>
+        <button>Sportback</button>
+        <button>allstreet</button>
+        <button>Sedan</button>
+        <button>Sport</button>
+        <button>Avant</button>
+        <button>Deportivo</button>
+        <button>SUV</button>
+    </div>
+
+    <div class="car-gallery">
+        <div class="car">
+            <img src="audi1.jpg" alt="Audi A1">
+            <h3>Audi A1</h3>
+            <p>2 modelos</p>
+        </div>
+        <div class="car">
+            <img src="audi3.jpg" alt="Audi A3">
+            <h3>Audi A3</h3>
+            <p>9 modelos</p>
+        </div>
+        <div class="car">
+            <img src="audi5.jpg" alt="Audi A5">
+            <h3>Audi A5</h3>
+            <p>6 modelos</p>
+        </div>
+        <div class="car">
+            <img src="audi6.jpg" alt="Audi A6">
+            <h3>Audi A6</h3>
+            <p>6 modelos</p>
+        </div>
+        <div class="car">
+            <img src="audi_etron.jpg" alt="Audi e-tron">
+            <h3>A6 e-tron</h3>
+            <p>4 modelos</p>
+        </div>
+        <div class="car">
+            <img src="audi7.jpg" alt="Audi A7">
+            <h3>Audi A7</h3>
+            <p>2 modelos</p>
+        </div>
+        <div class="car">
+            <img src="audi8.jpg" alt="Audi A8">
+            <h3>Audi A8</h3>
+            <p>5 modelos</p>
+        </div>
+        <div class="car">
+            <img src="audi_etron2.jpg" alt="Audi e-tron">
+            <h3>Audi e-tron</h3>
+            <p>4 modelos</p>
+        </div>
+    </div>
+
+
+  <div class="slider-container">
+    <button class="slider-btn prev" (click)="prevSlide()">‹</button>
+
+    <div class="slider" id="slider">
+      <img class="imagen-audi" *ngFor="let img of carImages" [src]="img" alt="Coche" />
+    </div>
+
+    <button class="slider-btn next" (click)="nextSlide()">›</button>
+  </div>
+
+
+    <div class="container">
+        <h1>Contenidos destacados</h1>
+        <div class="grid">
+            <div class="card">
+                <img src="image1.jpg" alt="Revisión gratuita Audi Spring Check">
+                <p>Revisión gratuita Audi Spring Check</p>
+            </div>
+            <div class="card">
+                <img src="image2.jpg" alt="Audi driving experience">
+                <p>Audi driving experience</p>
+            </div>
+            <div class="card">
+                <img src="image3.jpg" alt="Tu Audi de ocasión, sin esperas">
+                <p>Tu Audi de ocasión, sin esperas</p>
+            </div>
+            <div class="card">
+                <img src="image4.jpg" alt="Segunda edición del Audi e-tron drive">
+                <p>Segunda edición del Audi e-tron drive</p>
+            </div>
+        </div>
+    </div>
+<app-footer></app-footer>
+
+
+

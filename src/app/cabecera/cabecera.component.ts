@@ -42,6 +42,9 @@ export class CabeceraComponent implements OnInit {
   editName(): void {
     this.router.navigate(['/Perfil']); 
   }
+   registrarse(): void {
+    this.router.navigate(['/register']); 
+  }
 
   editEmail(): void {
     console.log('Poner tu correo');

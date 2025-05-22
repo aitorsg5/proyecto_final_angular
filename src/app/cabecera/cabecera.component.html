@@ -17,6 +17,8 @@
 
   <!-- Mostrar "Iniciar sesión" si está en modo invitado -->
   <button *ngIf="isGuest" mat-button (click)="login()">Iniciar sesión</button>
+    <button *ngIf="isGuest" mat-button (click)="registrarse()">Registrarse</button>
+
 
   <!-- Mostrar "Configuración" si está autenticado -->
   <button *ngIf="!isGuest" mat-button (click)="editName()">Configuración</button>

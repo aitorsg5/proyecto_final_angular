@@ -75,5 +75,7 @@ export class RegisterComponent implements AfterViewInit {
 
 
     };
+        this.router.navigate(['/']);
+
   }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Usuario } from '../models/usuario.model';
+import { tap } from 'rxjs/operators';
 
 
 
@@ -29,13 +30,14 @@ private currentUserSubject: BehaviorSubject<Usuario | null>;
 public currentUser: Observable<Usuario | null>;
 
 login(usuario: { email: string; password: string }): Observable<Usuario> {
-  return this.http.post<Usuario>('http://127.0.0.1:8000/api/login', usuario);
+  return this.http.post<Usuario>('http://127.0.0.1:8000/api/login', usuario)
+;
 }
 
-
-setUsuarioAutenticado(usuario: Usuario): void {
-  localStorage.setItem('currentUser', JSON.stringify(usuario));
+getUserId(id: number): Observable<Usuario> {
+  return this.http.get<Usuario>(`/api/users/${id}`);
 }
+
 
 constructor(private http: HttpClient) {
   const usuarioGuardado = localStorage.getItem('currentUser');
@@ -58,6 +60,15 @@ cargarSesion(): void {
     console.log("Modo invitado activado");
   }
 }
+logout(): Observable<any> {
+  return this.http.post('http://127.0.0.1:8000/api/logout', {}).pipe(
+    tap(() => {
+      this.isLoggedIn = false;
+      this.currentUserSubject.next(null);
+      
+    })
+  );
+}
 
 //metodo login que recibe objeto Usuario como parametro;
 //Marca el usuario como  que esta logeado;
@@ -66,10 +77,7 @@ cargarSesion(): void {
 
 // el metodo lo que hace es cambiar el valor isLoggedIn a null
 // Actualiza el currentUserSubject  a null
-logout() {
-  this.isLoggedIn = false;
-  this.currentUserSubject.next(null);
-}
+
 // Método isAuthenticated que devuelve un booleano.
 isAuthenticated(): boolean {
   // Devuelve true si el usuario está autenticado, false en caso contrario.
@@ -80,10 +88,7 @@ isAuthenticated(): boolean {
   }
 
 // Método getCurrentUser que devuelve un Observable de un Usuario o null.
-getCurrentUser(): Observable<Usuario | null> {
-  // Devuelve el Observable currentUser para que otras partes del código puedan escuchar los cambios en el usuario actual.
-  return this.currentUser;
-}
+
 
 // Método getUsuarios que devuelve un Observable de un array de Usuarios.
 getUsuarios(): Observable<Usuario[]> {

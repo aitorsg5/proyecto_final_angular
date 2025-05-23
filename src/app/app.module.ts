@@ -19,6 +19,9 @@ import { ListaDeCochesComponent } from './lista-de-coches/lista-de-coches.compon
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { ConfiguracionComponent } from './configuracion/configuracion.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CestaComponent } from './cesta/cesta.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,9 @@ import { PerfilComponent } from './perfil/perfil.component';
     ListaDeCochesComponent,
     LoginComponent,
     RegisterComponent,
-    PerfilComponent
+    PerfilComponent,
+    ConfiguracionComponent,
+    CestaComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +50,7 @@ import { PerfilComponent } from './perfil/perfil.component';
     MatButtonToggleModule,
     MatFormFieldModule,
     MatSelectModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

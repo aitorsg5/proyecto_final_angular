@@ -18,14 +18,22 @@
         <button>SUV</button>
     </div>
 
-    <div class="car-gallery">
-        <div class="car">
-            <img src="audi1.jpg" alt="Audi A1">
-            <h3>Audi A1</h3>
-            <p>2 modelos</p>
-        </div>
-      
+   
+<div class="car-gallery">
+    <div *ngFor="let coche of coches" class="car" (click)="irConfiguracion(coche.id)">
+  <img [src]="coche.imagenes_ruta && coche.imagenes_ruta.length > 0 
+            ? baseImageUrl + coche.imagenes_ruta[0] 
+            : 'assets/default.jpg'" 
+     alt="{{ coche.nombre }}">
+
+
+        <h3>{{ coche.nombre }}</h3>
+      <p>Kit: {{ coche.kit?.paquete }}</p>
+<p>Modelo: {{ coche.modelo?.nombre }}</p>
+        <p>Precio: {{ coche.precio_total | currency:'EUR' }}</p>
     </div>
+</div>
+
 
 
   <div class="slider-container">

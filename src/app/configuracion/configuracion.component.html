@@ -1,0 +1,24 @@
+<div *ngIf="loading">Cargando...</div>
+<div *ngIf="error">{{ error }}</div>
+
+<form *ngIf="!loading && !error" [formGroup]="form" (ngSubmit)="guardar()">
+  <h2>Configuración del coche: {{ coche.nombre }}</h2>
+  <img [src]="coche.imagenes_ruta && coche.imagenes_ruta.length > 0 ? coche.imagenes_ruta[0] : 'assets/default.jpg'" alt="{{ coche.nombre }}" />
+
+  <label for="kit">Kit:</label>
+  <select formControlName="kit_id" id="kit">
+    <option *ngFor="let kit of kits" [value]="kit.id">{{ kit.paquete }}</option>
+  </select>
+
+  <label for="caja">Caja:</label>
+  <select formControlName="caja_id" id="caja">
+    <option *ngFor="let caja of cajas" [value]="caja.id">{{ caja.tipo }}</option>
+  </select>
+
+  <label for="motor">Motor:</label>
+  <select formControlName="motor_id" id="motor">
+    <option *ngFor="let motor of motores" [value]="motor.id">{{ motor.motor }}</option>
+  </select>
+
+  <button type="submit">Guardar cambios</button>
+</form>

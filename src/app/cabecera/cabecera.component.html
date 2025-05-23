@@ -21,7 +21,9 @@
 
 
   <!-- Mostrar "Configuración" si está autenticado -->
-  <button *ngIf="!isGuest" mat-button (click)="editName()">Configuración</button>
+  <button *ngIf="!isGuest" mat-button (click)="Cesta()">Cesta</button>
+    <button *ngIf="!isGuest" mat-button (click)="editName()">Configuración</button>
+
 
   <!-- Mostrar "Cerrar sesión" solo si el usuario está autenticado -->
   <button *ngIf="!isGuest" mat-button (click)="logout()">Cerrar sesión</button>

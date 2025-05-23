@@ -2,6 +2,8 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../services/usuario.service';
+import { AuthService } from '../services/auth.service';
+
 import { Usuario } from '../models/usuario.model';
   @Component({
   selector: 'app-login',
@@ -13,7 +15,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
   passwordInput: string = '';
   isMuted: boolean = true; // Variable para controlar muteo del video
 
-  constructor(private usuarioService: UsuarioService, private router: Router) {}
+  constructor(private usuarioService: UsuarioService, private router: Router,
+  private authService: AuthService) {}
 
   ngOnInit(): void {
     this.setupVideo();
@@ -38,15 +41,18 @@ export class LoginComponent implements OnInit, AfterViewInit {
     video.muted = this.isMuted;
   }
 
- verificarCredenciales(): void {
+verificarCredenciales(): void {
   const usuario = { email: this.usuarioInput, password: this.passwordInput };
 
   this.usuarioService.login(usuario).subscribe(
     usuarioAutenticado => {
-      this.usuarioService.setUsuarioAutenticado(usuarioAutenticado); // Guarda usuario autenticado
-      alert('¡Inicio de sesión exitoso!');
-          this.router.navigate(['/index']);
+          console.log('Usuario logueado con todos sus datos:', usuario)
 
+      // Guarda en AuthService: puedes tener un método para guardar el estado de login y el userId
+      this.authService.setSession(usuarioAutenticado);
+
+      alert('¡Inicio de sesión exitoso!');
+      this.router.navigate(['/index']);
     },
     error => {
       alert('Credenciales incorrectas');
@@ -54,7 +60,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }
   );
 }
-
   irARegistro(): void {
     this.router.navigate(['/register']);
   }

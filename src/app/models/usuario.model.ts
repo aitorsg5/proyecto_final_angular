@@ -1,4 +1,5 @@
 export class Usuario {
+  
       name: string;
   email: string;
   password: string; // Cambiado a `password`

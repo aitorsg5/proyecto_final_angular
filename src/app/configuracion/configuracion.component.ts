@@ -1,0 +1,108 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
+
+import { CocheService } from '../services/coche.service';
+import { MotorService } from '../services/motor.service';
+import { KitService } from '../services/kit.service';
+import { CajaService } from '../services/caja.service';
+import { CestaService } from '../services/cesta.service';
+import { AuthService } from '../services/auth.service';
+import { UsuarioService } from '../services/usuario.service';
+
+
+import { Coche } from '../models/coche';
+import { Kit } from '../models/kit';
+import { Caja } from '../models/caja';
+import { Motor } from '../models/motor';
+import { Cesta } from '../models/cesta';
+
+
+@Component({
+  selector: 'app-configuracion',
+  templateUrl: './configuracion.component.html',
+  styleUrls: ['./configuracion.component.scss']
+})
+export class ConfiguracionComponent implements OnInit {
+
+  coche!: Coche;
+  form!: FormGroup;
+
+  kits: Kit[] = [];
+  cajas: Caja[] = [];
+  motores: Motor[] = [];
+
+  loading = true;
+  error: string | null = null;
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private fb: FormBuilder,
+    private cocheService: CocheService,
+    private motorService: MotorService,
+    private kitService: KitService,
+    private cajaService: CajaService,
+    private cestaService: CestaService,
+    private authService: AuthService,
+    private usuarioService: UsuarioService,
+
+
+
+
+
+  ) {}
+
+  ngOnInit(): void {
+    //  this.user_id = this.authService.getUserId()!;
+
+    this.loadOptions();  // Cargar listas para selects
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.cocheService.getCocheById(id).subscribe({
+      next: coche => {
+        this.coche = coche;
+        this.initForm();
+        this.loading = false;
+      },
+      error: () => {
+        this.error = 'No se pudo cargar el coche.';
+        this.loading = false;
+      }
+    });
+  }
+
+ loadOptions() {
+  this.kitService.getKits().subscribe({
+    next: kits => this.kits = kits,
+    error: () => this.error = 'Error cargando kits'
+  });
+
+  this.cajaService.getCaja().subscribe({
+    next: cajas => this.cajas = cajas,
+    error: () => this.error = 'Error cargando cajas'
+  });
+
+  this.motorService.getMotor().subscribe({
+    next: motores => this.motores = motores,
+    error: () => this.error = 'Error cargando motores'
+  });
+}
+
+
+  initForm() {
+    this.form = this.fb.group({
+      kit_id: [this.coche.kit?.id || null],
+      caja_id: [this.coche.caja_id],
+      motor_id: [this.coche.motor_id]
+    });
+  }
+
+guardar() {
+
+
+}
+
+
+
+}

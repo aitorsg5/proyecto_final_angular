@@ -1,6 +1,11 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { UsuarioService } from '../services/usuario.service';
 import { Usuario } from '../models/usuario.model';
+import { CocheService } from '../services/coche.service';
+import { AuthService } from '../services/auth.service';
+
+import { Coche } from '../models/coche';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -9,8 +14,9 @@ import { Usuario } from '../models/usuario.model';
   styleUrls: ['./index.component.scss']
 })
 export class IndexComponent implements OnInit, AfterViewInit {
+    coches: Coche[] = [];
+  baseImageUrl: string;
 
-  users: Usuario[] = [];
   videoSources: string[] = [
     'assets/video/AudiRs5.mp4',
     'assets/video/Audi_R8.mp4',
@@ -28,16 +34,22 @@ export class IndexComponent implements OnInit, AfterViewInit {
   ];
   currentIndex = 0;
 
-  constructor(private userService: UsuarioService) {}
+  constructor(private userService: UsuarioService,private cocheService: CocheService,private router: Router, private  authService: AuthService) {
+        this.baseImageUrl = this.cocheService.baseImageUrl;
 
-  ngOnInit(): void {
-  this.userService.cargarSesion();
+  }
 
-  this.userService.getCurrentUser().subscribe(usuario => {
-    if (!usuario) {
-      this.activarModoInvitado();
-    }
+
+
+ 
+
+ngOnInit(): void {
+  this.cocheService.getCoches().subscribe(data => {
+    this.coches = data;
   });
+
+
+
 }
 
 activarModoInvitado(): void {
@@ -46,11 +58,7 @@ activarModoInvitado(): void {
 }
 
   ngAfterViewInit(): void {
-    this.userService.getUsuarios().subscribe(data => {
-      this.users = data;
-      console.log(this.users);
-    });
-
+  
     this.setupVideo();
   }
 
@@ -95,4 +103,12 @@ activarModoInvitado(): void {
     this.currentIndex = (this.currentIndex - 1 + totalSlides) % totalSlides;
     slider.style.transform = `translateX(-${this.currentIndex * slideWidth}px)`;
   }
+irConfiguracion(id?: number) {
+  if (id == null) {
+    console.error('El ID del coche es inválido');
+    return;
+  }
+  this.router.navigate(['/configuracion', id]);
+}
+
 }

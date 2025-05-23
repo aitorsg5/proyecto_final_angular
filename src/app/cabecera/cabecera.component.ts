@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'; 
 import { UsuarioService } from '../services/usuario.service';
+import { Usuario } from '../models/usuario.model';
+
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-cabecera',
@@ -13,19 +16,21 @@ export class CabeceraComponent implements OnInit {
   userEmail: string = '';
   isGuest: boolean = true; // Por defecto, modo invitado
 
-  constructor(private router: Router, private userService: UsuarioService) {} 
+  constructor(private router: Router, private userService: UsuarioService, private  authService: AuthService) {} 
 
-  ngOnInit(): void {
-    this.userService.getCurrentUser().subscribe(usuario => {
-      if (usuario) {
-        this.userName = usuario.name;
-        this.userEmail = usuario.email;
-        this.isGuest = false; // Usuario autenticado
-      } else {
-        this.activarModoInvitado();
-      }
-    });
-  }
+ngOnInit(): void {
+  this.userService.currentUser.subscribe(usuario => {
+    if (usuario) {
+      this.userName = usuario.name;
+      this.userEmail = usuario.email;
+      this.isGuest = false;
+    } else {
+      this.activarModoInvitado();
+    }
+  });
+}
+
+
 
   activarModoInvitado(): void {
     this.userName = 'Invitado';
@@ -45,6 +50,9 @@ export class CabeceraComponent implements OnInit {
    registrarse(): void {
     this.router.navigate(['/register']); 
   }
+   Cesta(): void {
+    this.router.navigate(['/Cesta']); 
+  }
 
   editEmail(): void {
     console.log('Poner tu correo');
@@ -56,6 +64,7 @@ login(): void {
 
   logout(): void {
     this.userService.logout(); // Asegura que la sesión se cierre correctamente
+    this.authService.logout();
     this.activarModoInvitado(); // Cambia a modo invitado después de cerrar sesión
   }
 }

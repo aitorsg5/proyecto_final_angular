@@ -22,6 +22,9 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { ConfiguracionComponent } from './configuracion/configuracion.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CestaComponent } from './cesta/cesta.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -52,7 +55,14 @@ import { CestaComponent } from './cesta/cesta.component';
     MatSelectModule,
     ReactiveFormsModule
   ],
-  providers: [],
+providers: [
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }
+],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

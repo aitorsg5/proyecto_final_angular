@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import {throwError, Observable, BehaviorSubject } from 'rxjs';
 import { Usuario } from '../models/usuario.model';
-import { tap } from 'rxjs/operators';
+import { map, tap,catchError } from 'rxjs/operators'; // asegúrate de importar `map`
 
+import { HttpHeaders } from '@angular/common/http';
 
 
 @Injectable({
@@ -30,9 +31,18 @@ private currentUserSubject: BehaviorSubject<Usuario | null>;
 public currentUser: Observable<Usuario | null>;
 
 login(usuario: { email: string; password: string }): Observable<Usuario> {
-  return this.http.post<Usuario>('http://127.0.0.1:8000/api/login', usuario)
-;
+  return this.http.post<{ user: Usuario; token: string }>('http://127.0.0.1:8000/api/login', usuario).pipe(
+  map(response => {
+  localStorage.setItem('currentUser', JSON.stringify(response.user));
+  localStorage.setItem('token', response.token); // 👈 Guardas token por separado
+  this.currentUserSubject.next(response.user);
+  this.isLoggedIn = true;
+  return response.user;
+})
+
+  );
 }
+
 
 getUserId(id: number): Observable<Usuario> {
   return this.http.get<Usuario>(`/api/users/${id}`);
@@ -48,35 +58,36 @@ constructor(private http: HttpClient) {
   this.isLoggedIn = !!usuarioGuardado; // Establece `true` si hay un usuario guardado, `false` si no.
 }
 
-cargarSesion(): void {
-  const usuarioGuardado = localStorage.getItem('currentUser');
-
-  if (usuarioGuardado) {
-    this.currentUserSubject.next(JSON.parse(usuarioGuardado));
-    this.isLoggedIn = true;
-  } else {
-    this.currentUserSubject.next(null);
-    this.isLoggedIn = false;
-    console.log("Modo invitado activado");
-  }
-}
 logout(): Observable<any> {
-  return this.http.post('http://127.0.0.1:8000/api/logout', {}).pipe(
+  const token = localStorage.getItem('token');
+  if (!token) {
+    this.isLoggedIn = false;
+    this.currentUserSubject.next(null);
+
+    return new Observable(observer => {
+      observer.next({ message: 'No token found, logged out locally' });
+      observer.complete();
+    });
+  }
+
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`
+  });
+
+  return this.http.post('http://127.0.0.1:8000/api/logout', {}, { headers }).pipe(
     tap(() => {
       this.isLoggedIn = false;
       this.currentUserSubject.next(null);
-      
+      localStorage.removeItem('currentUser');
+      localStorage.removeItem('token');
+    }),
+    catchError(error => {
+      console.error('Error en logout:', error);
+      // Opcional: manejar el error o volver a lanzar para que el suscriptor también lo reciba
+      return throwError(() => error);
     })
   );
 }
-
-//metodo login que recibe objeto Usuario como parametro;
-//Marca el usuario como  que esta logeado;
-// Actualiza el currentUserSubject con el usuario actual, notificando a los suscriptores.
-
-
-// el metodo lo que hace es cambiar el valor isLoggedIn a null
-// Actualiza el currentUserSubject  a null
 
 // Método isAuthenticated que devuelve un booleano.
 isAuthenticated(): boolean {

@@ -4,40 +4,41 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { UsuarioService } from '../services/usuario.service';
 import { Usuario } from '../models/usuario.model';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
   private userSubject = new BehaviorSubject<number | null>(null);
-constructor(private usuarioService: UsuarioService) { }
 
-  
+  constructor(private usuarioService: UsuarioService) { }
 
-
-setSession(usuario: Usuario): void {
-  localStorage.setItem('currentUser', JSON.stringify(usuario));
-  localStorage.setItem('isLoggedIn', 'true');
-  // Guarda el userId para recuperar luego
-}
+  setSession(usuario: Usuario & { token: string }): void {
+    localStorage.setItem('currentUser', JSON.stringify(usuario));
+    localStorage.setItem('isLoggedIn', 'true');
+  }
 
   getCurrentUser(): Observable<number | null> {
     return this.userSubject.asObservable();
   }
-  
 
   login(id: number) {
-    localStorage.setItem('user', JSON.stringify({ id }));
+    localStorage.setItem('currentUser', JSON.stringify({ id })); // unifica nombre
     this.userSubject.next(id);
   }
 
   logout() {
-    localStorage.removeItem('user');
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('isLoggedIn');
     this.userSubject.next(null);
   }
 
   isLoggedIn(): boolean {
-    return this.userSubject.value !== null;
+    return localStorage.getItem('isLoggedIn') === 'true';
+  }
+
+  getToken(): string | null {
+    const user = localStorage.getItem('currentUser');
+    return user ? JSON.parse(user).token : null;
   }
 }

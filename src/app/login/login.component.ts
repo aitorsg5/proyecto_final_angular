@@ -2,7 +2,6 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../services/usuario.service';
-import { AuthService } from '../services/auth.service';
 
 import { Usuario } from '../models/usuario.model';
   @Component({
@@ -16,7 +15,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   isMuted: boolean = true; // Variable para controlar muteo del video
 
   constructor(private usuarioService: UsuarioService, private router: Router,
-  private authService: AuthService) {}
+ ) {}
 
   ngOnInit(): void {
     this.setupVideo();
@@ -48,8 +47,6 @@ verificarCredenciales(): void {
     usuarioAutenticado => {
           console.log('Usuario logueado con todos sus datos:', usuario)
 
-      // Guarda en AuthService: puedes tener un método para guardar el estado de login y el userId
-      this.authService.setSession(usuarioAutenticado);
 
       alert('¡Inicio de sesión exitoso!');
       this.router.navigate(['/index']);

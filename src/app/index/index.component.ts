@@ -7,7 +7,6 @@ import { AuthService } from '../services/auth.service';
 import { Coche } from '../models/coche';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './index.component.html',
@@ -41,7 +40,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
 
 
 
- 
+
 
 ngOnInit(): void {
   this.cocheService.getCoches().subscribe(data => {
@@ -58,7 +57,7 @@ activarModoInvitado(): void {
 }
 
   ngAfterViewInit(): void {
-  
+
     this.setupVideo();
   }
 

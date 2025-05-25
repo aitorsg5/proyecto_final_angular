@@ -106,8 +106,10 @@ getUsuarios(): Observable<Usuario[]> {
   // Realiza una solicitud HTTP GET a la URL especificada para obtener todos los usuarios.
   return this.http.get<Usuario[]>(this.url);
 }
-// Método esAdmin que verifica si el usuario actual es administrador.
-// Devuelve true si el usuario actual es administrador, false en caso contrario.
+public getCurrentUser(): Usuario | null {
+  return this.currentUserSubject.value;
+}
+
 
 addUsuario(newUsuario: Usuario): Observable<Usuario> {
   return this.http.post<Usuario>(this.url, newUsuario);

@@ -99,9 +99,38 @@ export class ConfiguracionComponent implements OnInit {
   }
 
 guardar() {
+  const usuarioStr = localStorage.getItem('currentUser');
+  const usuario = usuarioStr ? JSON.parse(usuarioStr) : null;
+  const userId = usuario ? usuario.id : null;
 
+  if (!userId) {
+    this.error = 'Debes estar logueado para guardar.';
+    return;
+  }
 
+  const nuevaCesta = {
+    user_id: userId,
+    coche_id: this.coche.id!,
+    kit_id: this.form.value.kit_id,
+    caja_id: this.form.value.caja_id,
+    modelo_id: this.coche.modelo?.id,
+    motor_id: this.form.value.motor_id,
+    precio_total: this.coche.precio_total ?? 0 // Si tienes el precio total calculado
+  };
+
+  console.log('Datos a enviar:', nuevaCesta);
+
+  this.cestaService.createCesta(nuevaCesta).subscribe({
+    next: () => {
+      this.router.navigate(['/Cesta']);
+    },
+    error: (err) => {
+      this.error = 'Error al guardar la cesta: ' + (err.error?.message || err.message);
+      console.error(err);
+    }
+  });
 }
+
 
 
 

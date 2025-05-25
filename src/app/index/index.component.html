@@ -1,37 +1,36 @@
 <app-cabecera></app-cabecera>
 
 <video id="myVideo1" autoplay muted loop style="cursor: pointer;">
-   
+
 </video>
 
     <div class="filters">
-        <input type="checkbox" id="todos" checked>
-        <label for="todos">Todos</label>
-        <button>100% eléctrico</button>
-        <button>Híbrido enchufable</button>
-        <button>Sportback</button>
-        <button>allstreet</button>
-        <button>Sedan</button>
-        <button>Sport</button>
-        <button>Avant</button>
-        <button>Deportivo</button>
-        <button>SUV</button>
-    </div>
+  <!-- Botón para mostrar todos -->
+  <button (click)="filtrarPorModelo('Todos')">Todos</button>
 
-   
+  <!-- Botones para cada modelo único -->
+  <button *ngFor="let modelo of modelosUnicos" (click)="filtrarPorModelo(modelo)">
+    {{ modelo }}
+  </button>
+</div>
+
 <div class="car-gallery">
-    <div *ngFor="let coche of coches" class="car" (click)="irConfiguracion(coche.id)">
-  <img [src]="coche.imagenes_ruta && coche.imagenes_ruta.length > 0 
-            ? baseImageUrl + coche.imagenes_ruta[0] 
-            : 'assets/default.jpg'" 
-     alt="{{ coche.nombre }}">
+  <!-- Mostrar coches filtrados -->
+  <div *ngFor="let coche of cochesFiltrados" class="car" (click)="irConfiguracion(coche.id)">
+    <img
+      [src]="
+        coche.imagenes_ruta && coche.imagenes_ruta.length > 0
+        ? baseImageUrl + coche.imagenes_ruta[0]
+        : 'assets/default.jpg'
+      "
+      [alt]="coche.nombre"
+    >
 
-
-        <h3>{{ coche.nombre }}</h3>
-      <p>Kit: {{ coche.kit?.paquete }}</p>
-<p>Modelo: {{ coche.modelo?.nombre }}</p>
-        <p>Precio: {{ coche.precio_total | currency:'EUR' }}</p>
-    </div>
+    <h3>{{ coche.nombre }}</h3>
+    <p>Kit: {{ coche.kit?.paquete }}</p>
+    <p>Modelo: {{ coche.modelo?.nombre }}</p>
+    <p>Precio: {{ coche.precio_total | currency:'EUR' }}</p>
+  </div>
 </div>
 
 

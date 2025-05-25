@@ -40,15 +40,28 @@ export class IndexComponent implements OnInit, AfterViewInit {
 
 
 
-
+cochesFiltrados: Coche[] = []; // Lista que se mostrará según filtro
+modelosUnicos: string[] = [];  // Modelos únicos para filtro
 
 ngOnInit(): void {
   this.cocheService.getCoches().subscribe(data => {
     this.coches = data;
+    this.cochesFiltrados = data; // inicialmente mostramos todos
+
+    // Obtener modelos únicos no nulos y con tipo string seguro
+    const modelos = data
+      .map(coche => coche.modelo?.nombre)
+      .filter((nombre): nombre is string => nombre !== undefined && nombre !== null);
+
+    this.modelosUnicos = Array.from(new Set(modelos));
   });
-
-
-
+}
+filtrarPorModelo(modelo: string): void {
+  if (modelo === 'Todos' || modelo === '') {
+    this.cochesFiltrados = this.coches;
+  } else {
+    this.cochesFiltrados = this.coches.filter(coche => coche.modelo?.nombre === modelo);
+  }
 }
 
 activarModoInvitado(): void {

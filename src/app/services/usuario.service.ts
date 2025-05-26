@@ -58,20 +58,29 @@ constructor(private http: HttpClient) {
 }
 
 logout(): Observable<any> {
+  console.log("llega1")
+
   const token = localStorage.getItem('token');
+    console.log('Token en logout:', token);  // <-- Aquí el console.log del token
+
   if (!token) {
+      console.log("llega2")
+
     this.isLoggedIn = false;
     this.currentUserSubject.next(null);
 
     return new Observable(observer => {
+        console.log("llega4")
+
       observer.next({ message: 'No token found, logged out locally' });
       observer.complete();
     });
   }
-
+console.log("llega")
   const headers = new HttpHeaders({
     'Authorization': `Bearer ${token}`
   });
+console.log("llega5")
 
   return this.http.post('http://127.0.0.1:8000/api/logout', {}, { headers }).pipe(
     tap(() => {
@@ -120,9 +129,19 @@ addUsuario1(usuario: {  name: string; email: string; password: string }): Observ
   return this.http.post<Usuario>('http://127.0.0.1:8000/api/post', usuario);
 }
 
-updateUsuario(id: number, updatedUsuario: Usuario): Observable<Usuario> {
-  this.currentUserSubject.next(updatedUsuario);
-  return this.http.put<Usuario>(`http://127.0.0.1:8000/api/usuarios/${id}`, updatedUsuario);
+updateUsuario(updatedUsuario: Partial<Usuario>): Observable<Usuario> {
+  const token = localStorage.getItem('token');
+  const headers = token ? new HttpHeaders({ 'Authorization': `Bearer ${token}` }) : undefined;
+
+  // La URL ya no lleva ID porque el backend usa el token para identificar al usuario
+  return this.http.put<Usuario>('http://127.0.0.1:8000/api/user/update', updatedUsuario, { headers }).pipe(
+    tap(usuarioActualizado => {
+      // Actualizar currentUserSubject con el usuario actualizado
+      this.currentUserSubject.next(usuarioActualizado);
+      // Actualizar localStorage para mantener sincronizado
+      localStorage.setItem('currentUser', JSON.stringify(usuarioActualizado));
+    })
+  );
 }
 
 

@@ -11,7 +11,6 @@ import { HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UsuarioService {
-
     private url = 'http://127.0.0.1:8000/api/users'; // Cambia la URL si es necesario
 
 
@@ -97,6 +96,9 @@ isAuthenticated(): boolean {
  registrarUsuario(usuario: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(this.url, usuario);
   }
+public setCurrentUser(usuario: Usuario | null): void {
+  this.currentUserSubject.next(usuario);
+}
 
 // Método getCurrentUser que devuelve un Observable de un Usuario o null.
 
@@ -120,8 +122,9 @@ addUsuario1(usuario: {  name: string; email: string; password: string }): Observ
 
 updateUsuario(id: number, updatedUsuario: Usuario): Observable<Usuario> {
   this.currentUserSubject.next(updatedUsuario);
-  return this.http.put<Usuario>(`${this.url}/${id}`, updatedUsuario);
+  return this.http.put<Usuario>(`http://127.0.0.1:8000/api/usuarios/${id}`, updatedUsuario);
 }
+
 
 deleteUsuario(id: number): Observable<void> {
   return this.http.delete<void>(`${this.url}/${id}`);

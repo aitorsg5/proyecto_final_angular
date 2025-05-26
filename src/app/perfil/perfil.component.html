@@ -1,1 +1,45 @@
-<p>perfil works!</p>
+<div class="contenedor-register">
+  <div class="card-register">
+    <div class="titulo">Editar perfil</div>
+    <form (ngSubmit)="actualizarPerfil()">
+      <div class="form-group">
+        <input
+          type="text"
+          name="nombre"
+          placeholder="Nombre"
+          [(ngModel)]="usuarioActual.name"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <input
+          type="email"
+          name="email"
+          placeholder="Correo electrónico"
+          [(ngModel)]="usuarioActual.email"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <input
+          type="password"
+          name="password"
+          placeholder="Nueva contraseña"
+          [(ngModel)]="usuarioActual.password"
+        />
+      </div>
+
+      <button type="submit" class="btn-login">Guardar cambios</button>
+      <button type="button" class="btn-login" (click)="cancelarEdicion()">Cancelar</button>
+    </form>
+  </div>
+</div>
+
+<div class="video">
+  <video autoplay muted loop id="myVideo">
+    <source src="../../assets/video/Audi_r8_Register.mp4" type="video/mp4" />
+    Your browser does not support HTML5 video.
+  </video>
+</div>

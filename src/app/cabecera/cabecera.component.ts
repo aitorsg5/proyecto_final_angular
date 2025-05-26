@@ -47,7 +47,7 @@ private userSubscription: Subscription | undefined;
  
 
   editName(): void {
-    this.router.navigate(['/Perfil']);
+    this.router.navigate(['/perfil']);
   }
 
   registrarse(): void {
@@ -58,9 +58,7 @@ private userSubscription: Subscription | undefined;
     this.router.navigate(['/Cesta']);
   }
 
-  editEmail(): void {
-    console.log('Poner tu correo');
-  }
+
 
   login(): void {
     console.log("Redirigir a la página de inicio de sesión...");

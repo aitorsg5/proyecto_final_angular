@@ -1,49 +1,300 @@
-.footer {
-    background-color: black;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    
-  }
-  
-  .footer-container {
+/* --- Estilos Globales (ejemplo, adapta a tu sitio) --- */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna y limpia */
     display: flex;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: auto;
-  }
-  
-  .footer-column {
-    flex: 1;
-    padding: 10px ;
-  }
-  
-  .footer-column h3 {
-    font-size: 18px;
-    margin-bottom: 15px;
-  }
-  
-  .footer-column ul {
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que el footer quede abajo en páginas con poco contenido */
+    background-color: #f4f4f4; /* Color de fondo general de la página (ejemplo) */
+    color: #333; /* Color de texto general (ejemplo) */
+}
+
+main {
+    flex-grow: 1; /* Permite que el main ocupe el espacio disponible, empujando el footer hacia abajo */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+}
+
+/* --- Estilos del Footer --- */
+.site-footer {
+    background-color: #000000; /* Fondo negro */
+    color: #FFFFFF;           /* Texto blanco */
+    padding: 60px 25px 0;      /* Relleno: 60px arriba, 25px a los lados, 0 abajo (el bottom-bar tendrá el suyo) */
+    font-size: 15px;
+    line-height: 1.7;
+}
+.social-icons a {
+    color: #e0e0e0; /* Color inicial del SVG */
+    font-size: 1.6em; /* Controla el tamaño base del SVG (1em dentro del SVG se refiere a esto) */
+    /* ...otros estilos como transiciones y display que ya tenías... */
+    display: inline-flex; /* Asegura buena alineación vertical si es necesario */
+    align-items: center;
+}
+
+.social-icons a:hover {
+    color: #FFFFFF; /* Color del SVG al pasar el ratón */
+    /* ...otros estilos hover como transform... */
+}
+.footer-main-content {
+    max-width: 1280px; /* Ancho máximo del contenido del footer */
+    margin: 0 auto;    /* Centrar contenido */
+    display: flex;
+    flex-wrap: wrap;   /* Permitir que las columnas se envuelvan en pantallas pequeñas */
+    justify-content: space-between; /* Distribuir espacio entre columnas */
+    gap: 35px;         /* Espacio entre columnas */
+    padding-bottom: 45px; /* Espacio antes de la barra inferior del footer */
+}
+
+.footer-column {
+    flex: 1; /* Permitir que las columnas crezcan y se encojan según el espacio */
+    min-width: 230px;/* Ancho mínimo para cada columna antes de envolverse */
+    margin-bottom: 30px; /* Espacio inferior para cuando las columnas se apilan */
+}
+
+.footer-column h3 {
+    font-size: 1.35em; /* Tamaño del título de la columna */
+    color: #f5f5f5;    /* Color ligeramente menos brillante que el blanco puro */
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 12px; /* Espacio para la línea inferior */
+}
+
+.footer-column h3::after { /* Línea decorativa sutil bajo los títulos h3 */
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 45px;
+    height: 2px;
+    background-color: #444; /* Un gris oscuro para la línea, o un color de acento */
+}
+
+.footer-column ul {
     list-style: none;
     padding: 0;
-  }
-  
-  .footer-column ul li {
-    margin-bottom: 10px;
-  }
-  
-  .footer-column a {
-    color: white;
+    margin: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 14px; /* Espacio entre elementos de la lista */
+}
+
+.footer-column ul li a {
+    color: #e0e0e0; /* Color de los enlaces */
     text-decoration: none;
-  }
-  
-  .footer-column a:hover {
+    transition: color 0.2s ease-in-out, padding-left 0.2s ease-in-out;
+    display: flex; /* Para alinear iconos con texto */
+    align-items: center;
+}
+
+.footer-column ul li a:hover {
+    color: #FFFFFF;    /* Color del enlace al pasar el ratón */
+    padding-left: 8px; /* Pequeño desplazamiento a la derecha al pasar el ratón */
+}
+
+.footer-column ul li a:hover i {
+    color: #FFFFFF; /* Icono también cambia a blanco brillante */
+}
+
+.footer-column ul li i { /* Estilo para los iconos dentro de las listas */
+    margin-right: 12px; /* Espacio entre el icono y el texto */
+    font-size: 0.95em;  /* Tamaño del icono ligeramente más pequeño que el texto */
+    width: 20px;        /* Ancho fijo para asegurar alineación */
+    text-align: center;
+    color: #a0a0a0;     /* Color de los iconos (un gris más tenue) */
+    transition: color 0.2s ease-in-out;
+}
+
+/* --- Estilos de Redes Sociales --- */
+.social-icons {
+    display: flex;
+    gap: 18px; /* Espacio entre iconos sociales */
+    margin-bottom: 30px; /* Espacio antes del formulario de newsletter */
+}
+
+.social-icons a {
+    color: #e0e0e0;
+    font-size: 1.6em; /* Tamaño de los iconos sociales */
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease;
+    text-decoration: none;
+}
+
+.social-icons a:hover {
+    transform: translateY(-5px) scale(1.1); /* Efecto de elevación y escala al pasar el ratón */
+    color: #FFFFFF; /* O un color de acento de tu marca */
+}
+
+/* --- Formulario de Newsletter (Opcional) --- */
+.newsletter-signup h4 {
+    font-size: 1.15em;
+    color: #f5f5f5;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.footer-form {
+    display: flex;
+    max-width: 300px; /* Ancho máximo del formulario */
+}
+
+.footer-form input[type="email"] {
+    flex-grow: 1;
+    padding: 12px 15px;
+    border: 1px solid #444;
+    background-color: #1a1a1a; /* Fondo oscuro para el input */
+    color: #FFFFFF;
+    border-radius: 5px 0 0 5px; /* Bordes redondeados a la izquierda */
+    font-size: 0.95em;
+    outline: none; /* Sin borde al hacer foco (puedes añadir estilos de foco si lo deseas) */
+}
+
+.footer-form input[type="email"]::placeholder {
+    color: #888;
+}
+
+.footer-form button[type="submit"] {
+    padding: 12px 18px;
+    background-color: #333; /* Color del botón */
+    color: #FFFFFF;
+    border: 1px solid #444;
+    border-left: none;
+    border-radius: 0 5px 5px 0; /* Bordes redondeados a la derecha */
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    font-size: 1em;
+}
+
+.footer-form button[type="submit"]:hover {
+    background-color: #555; /* Color del botón al pasar el ratón */
+}
+
+.footer-form button[type="submit"] i {
+    font-size: 0.9em;
+}
+
+/* --- Barra Inferior del Footer --- */
+.footer-bottom-bar {
+    background-color: #0a0a0a; /* Un negro ligeramente diferente o el mismo, para distinción */
+    padding: 25px 25px;
+    text-align: center;
+    border-top: 1px solid #222; /* Línea divisoria sutil */
+}
+
+.footer-bottom-content {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap; /* Para que se ajuste en móviles */
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px; /* Espacio entre elementos si se envuelven */
+}
+
+.footer-legal-links a,
+.footer-legal-links span {
+    color: #a0a0a0; /* Color para enlaces legales y separadores */
+    text-decoration: none;
+    font-size: 0.9em;
+    margin: 0 6px;
+    transition: color 0.2s ease-in-out;
+}
+
+.footer-legal-links a:hover {
+    color: #FFFFFF;
     text-decoration: underline;
-  }
-  
-  .footer-divider {
-    width: 100%;
-    height: 1px;
-    background-color: white;
-    margin: 20px 0;
-  }
+}
+
+.footer-legal-links span { /* Estilo para el separador "|" */
+    user-select: none; /* Evitar que se pueda seleccionar el separador */
+}
+
+.footer-copyright-text p {
+    margin: 0;
+    color: #a0a0a0;
+    font-size: 0.9em;
+}
+
+/* --- Media Queries para Responsividad --- */
+
+/* Tablets y pantallas medianas */
+@media (max-width: 992px) {
+    .site-footer {
+        padding: 50px 20px 0;
+    }
+    .footer-main-content {
+        gap: 25px; /* Reducir un poco el espacio entre columnas */
+    }
+    .footer-column {
+        min-width: calc(50% - 25px); /* Dos columnas en tablets */
+    }
+     /* Si quieres que la columna de redes o contacto ocupe todo el ancho en tablet: */
+    /* .footer-column.social-media-column (añade esta clase en el HTML si es necesario) {
+        min-width: 100%;
+    } */
+}
+
+/* Dispositivos móviles */
+@media (max-width: 767px) {
+    .site-footer {
+        padding-top: 40px;
+    }
+    .footer-main-content {
+        flex-direction: column; /* Apilar columnas */
+        align-items: flex-start; /* Alinear contenido de columnas a la izquierda */
+        gap: 0;
+    }
+    .footer-column {
+        min-width: 100%; /* Cada columna ocupa todo el ancho */
+        margin-bottom: 35px; /* Espacio entre columnas apiladas */
+    }
+    .footer-column:last-child {
+        margin-bottom: 20px; /* Menos margen para la última columna antes de la barra inferior */
+    }
+    .footer-column h3 {
+        font-size: 1.25em;
+    }
+    .footer-column h3::after {
+        width: 35px; /* Línea bajo h3 un poco más corta */
+    }
+    .social-icons {
+        justify-content: flex-start; /* Alinear iconos sociales a la izquierda */
+        gap: 15px;
+    }
+    .social-icons a {
+        font-size: 1.5em;
+    }
+    .newsletter-signup h4 {
+        text-align: left;
+    }
+    .footer-form {
+        max-width: 100%; /* Formulario ocupa todo el ancho disponible */
+    }
+
+    .footer-bottom-bar {
+        padding: 20px 20px;
+    }
+    .footer-bottom-content {
+        flex-direction: column; /* Apilar copyright y enlaces legales */
+        gap: 12px;
+    }
+    .footer-legal-links {
+        order: 2; /* Copyright primero, luego enlaces legales en móviles */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* Centrar los enlaces legales si se envuelven */
+    }
+    .footer-legal-links a {
+        margin: 0 5px; /* Ajustar margen para enlaces legales en móviles */
+    }
+    .footer-legal-links span {
+        margin: 0 3px;
+    }
+    .footer-copyright-text {
+        order: 1;
+    }
+}

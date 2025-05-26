@@ -17,23 +17,23 @@
         </button>
       </div>
     </div>
-
-    </aside>
+  </aside>
 
   <main class="modelos-display">
     <div class="car-gallery">
-      <div *ngIf="cochesFiltrados.length === 0" class="no-results">
+      <div *ngIf="cochesMostrados.length === 0" class="no-results">
         No se encontraron coches con los filtros seleccionados.
       </div>
-      <div *ngFor="let coche of cochesFiltrados" class="modelo-card" (click)="irConfiguracion(coche.id)">
-        <img
-          [src]="
-            coche.imagenes_ruta && coche.imagenes_ruta.length > 0
-              ? baseImageUrl + coche.imagenes_ruta[0]
-              : 'assets/default.jpg'
-          "
-          [alt]="coche.nombre"
-        />
+
+      <div *ngFor="let coche of cochesMostrados" class="modelo-card" (click)="irConfiguracion(coche.id)">
+       <img
+      [src]="
+        coche.imagenes_ruta && coche.imagenes_ruta.length > 0
+        ? baseImageUrl + coche.imagenes_ruta[0]
+        : 'assets/default.jpg'
+      "
+      [alt]="coche.nombre"
+    >
         <h3>{{ coche.nombre }}</h3>
         <p><strong>Modelo:</strong> {{ coche.modelo?.nombre }}</p>
         <p class="price">{{ coche.precio_total | currency : 'EUR' }}</p>
@@ -41,7 +41,7 @@
           <button class="btn-discover">Descubrir</button>
           <button class="btn-configure">Configurar</button>
         </div>
-        </div>
+      </div>
     </div>
   </main>
 </div>

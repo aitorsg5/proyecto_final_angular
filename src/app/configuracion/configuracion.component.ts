@@ -24,6 +24,7 @@ import { Cesta } from '../models/cesta';
   styleUrls: ['./configuracion.component.scss']
 })
 export class ConfiguracionComponent implements OnInit {
+  baseImageUrl: string;
 
   coche!: Coche;
   form!: FormGroup;
@@ -51,7 +52,10 @@ export class ConfiguracionComponent implements OnInit {
 
 
 
-  ) {}
+  ) {
+        this.baseImageUrl = this.cocheService.baseImageUrl;
+
+  }
 
   ngOnInit(): void {
     //  this.user_id = this.authService.getUserId()!;
@@ -88,6 +92,20 @@ export class ConfiguracionComponent implements OnInit {
     error: () => this.error = 'Error cargando motores'
   });
 }
+imagenIndex = 0;
+
+prevImage() {
+  if (!this.coche?.imagenes_ruta) return;
+
+  this.imagenIndex = (this.imagenIndex - 1 + this.coche.imagenes_ruta.length) % this.coche.imagenes_ruta.length;
+}
+
+nextImage() {
+  if (!this.coche?.imagenes_ruta) return;
+
+  this.imagenIndex = (this.imagenIndex + 1) % this.coche.imagenes_ruta.length;
+}
+
 
 
   initForm() {

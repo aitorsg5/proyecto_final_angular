@@ -12,15 +12,27 @@
       <h1>{{ coche.nombre }}</h1>
       <p class="base-price">Precio base: {{ coche.precio_total | currency:'EUR' }}</p>
     </div>
+ <div *ngIf="coche.imagenes_ruta && coche.imagenes_ruta.length > 1" class="image-slider-controls">
+  <button type="button" (click)="prevImage()">Anterior</button>
+  <span>{{ imagenIndex + 1 }} / {{ coche.imagenes_ruta.length }}</span>
+  <button type="button" (click)="nextImage()">Siguiente</button>
+</div>
 
     <div class="config-main-content">
-      <div class="config-image-gallery">
-        <img
-          [src]="coche.imagenes_ruta && coche.imagenes_ruta.length > 0 ? coche.imagenes_ruta[0] : 'assets/default.jpg'"
-          alt="{{ coche.nombre }}"
-          class="main-car-image"
-        />
-        </div>
+  <div class="config-image-gallery">
+  <img
+    [src]="
+      coche.imagenes_ruta && coche.imagenes_ruta.length > 0 
+      ? 'http://localhost:8000/storage/' + coche.imagenes_ruta[imagenIndex]
+      : 'assets/default.jpg'
+    "
+    alt="{{ coche.nombre }}"
+    class="main-car-image"
+  />
+
+
+</div>
+
 
       <div class="config-options">
         <div class="option-group">

@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./index.component.scss']
 })
 export class IndexComponent implements OnInit, AfterViewInit {
-    coches: Coche[] = [];
+  coches: Coche[] = [];
   baseImageUrl: string;
 
   videoSources: string[] = [
@@ -34,7 +34,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
   currentIndex = 0;
 
   constructor(private userService: UsuarioService,private cocheService: CocheService,private router: Router, private  authService: AuthService) {
-        this.baseImageUrl = this.cocheService.baseImageUrl;
+  this.baseImageUrl = this.cocheService.baseImageUrl;
 
   }
 

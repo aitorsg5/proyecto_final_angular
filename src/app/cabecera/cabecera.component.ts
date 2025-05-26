@@ -44,9 +44,7 @@ private userSubscription: Subscription | undefined;
     console.log("Modo invitado activado. Limitando funcionalidades...");
   }
 
-  toggleMenu(): void {
-    this.menuVisible = !this.menuVisible;
-  }
+ 
 
   editName(): void {
     this.router.navigate(['/Perfil']);
@@ -68,6 +66,15 @@ private userSubscription: Subscription | undefined;
     console.log("Redirigir a la página de inicio de sesión...");
     this.router.navigate(['/login']);
   }
+  
+
+toggleMenu() {
+  this.menuVisible = !this.menuVisible;
+}
+
+closeMenu() {
+  this.menuVisible = false;
+}
 
   logout(): void {
     this.userService.logout().subscribe({

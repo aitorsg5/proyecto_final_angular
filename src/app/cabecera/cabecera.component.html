@@ -1,35 +1,27 @@
 <nav class="navbar">
   <svg class="svg-icon1" style="width: 2.2em; height: 2.2em; fill: white; margin-right: 10px; vertical-align: unset; display: inline-block;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <path d="M19.848 7.848c-.992 0-1.902.348-2.616.928a4.134 4.134 0 0 0-2.616-.928c-.992 0-1.902.348-2.616.928a4.134 4.134 0 0 0-2.616-.928c-.992 0-1.902.348-2.616.928a4.152 4.152 0 1 0 0 6.448c.714.58 1.624.928 2.616.928s1.902-.348 2.616-.928c.714.58 1.624.928 2.616.928s1.902-.348 2.616-.928a4.152 4.152 0 1 0 2.616-7.376zm-2.616 6.018A3.198 3.198 0 0 1 16.634 12c0-.696.222-1.34.598-1.866.376.526.598 1.17.598 1.866 0 .696-.222 1.34-.598 1.866zm-5.232 0A3.198 3.198 0 0 1 11.402 12c0-.696.222-1.34.598-1.866.376.526.598 1.17.598 1.866 0 .696-.222 1.34-.598 1.866zm-5.232 0A3.198 3.198 0 0 1 6.17 12c0-.696.222-1.34.598-1.866.376.526.598 1.17.598 1.866 0 .696-.222 1.34-.598 1.866zM.938 12a3.214 3.214 0 0 1 5.17-2.549A4.134 4.134 0 0 0 5.232 12c0 .961.328 1.846.876 2.549A3.214 3.214 0 0 1 .938 12zm6.49 2.549A4.134 4.134 0 0 0 8.304 12c0-.961-.328-1.846-.876-2.549a3.203 3.203 0 0 1 1.956-.665c.736 0 1.414.248 1.956.665A4.13 4.13 0 0 0 10.464 12c0 .961.328 1.846.876 2.549a3.203 3.203 0 0 1-1.956.665 3.196 3.196 0 0 1-1.956-.665zm5.232 0A4.13 4.13 0 0 0 13.536 12c0-.961-.328-1.846-.876-2.55.542-.416 1.22-.665 1.956-.665s1.414.248 1.956.665a4.13 4.13 0 0 0-.876 2.549c0 .961.328 1.846.876 2.549a3.203 3.203 0 0 1-1.956.665 3.19 3.19 0 0 1-1.956-.664zm7.188.665a3.196 3.196 0 0 1-1.956-.665A4.136 4.136 0 0 0 18.768 12c0-.961-.328-1.846-.876-2.549a3.214 3.214 0 1 1 1.956 5.763z"/>
-</svg>
-  <button class="nav-button1" mat-button routerLink="/index" >Home</button>
+  </svg>
 
-  <button class="nav-button1" mat-button routerLink="/coches" >Modelos Y Configuraciones</button>
+  <button class="nav-button1" mat-button routerLink="/index">Home</button>
+  <button class="nav-button1" mat-button routerLink="/coches">Modelos Y Configuraciones</button>
 
-  <div class="user-menu">
-    <svg (click)="toggleMenu()" class="svg-icon" style="width: 2.0em; height: 2.0em; vertical-align: middle; fill: white; overflow: hidden;" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <div class="user-menu" (click)="toggleMenu()" tabindex="0" (blur)="closeMenu()">
+    <svg class="svg-icon" style="width: 2em; height: 2em; fill: white;" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
       <path d="M843.282963 870.115556c-8.438519-140.515556-104.296296-257.422222-233.908148-297.14963C687.881481 536.272593 742.4 456.533333 742.4 364.088889c0-127.241481-103.158519-230.4-230.4-230.4S281.6 236.847407 281.6 364.088889c0 92.444444 54.518519 172.183704 133.12 208.877037-129.611852 39.727407-225.46963 156.634074-233.908148 297.14963-0.663704 10.903704 7.964444 20.195556 18.962963 20.195556l0 0c9.955556 0 18.299259-7.774815 18.962963-17.73037C227.745185 718.506667 355.65037 596.385185 512 596.385185s284.254815 122.121481 293.357037 276.195556c0.568889 9.955556 8.912593 17.73037 18.962963 17.73037C835.318519 890.311111 843.946667 881.019259 843.282963 870.115556zM319.525926 364.088889c0-106.287407 86.186667-192.474074 192.474074-192.474074s192.474074 86.186667 192.474074 192.474074c0 106.287407-86.186667 192.474074-192.474074 192.474074S319.525926 470.376296 319.525926 364.088889z"/>
     </svg>
+
+    <div [ngClass]="{'menu-visible': menuVisible}" class="dropdown-menu" (click)="$event.stopPropagation()">
+      <p><strong>{{ userName }}</strong></p>
+      <p>{{ userEmail }}</p>
+
+      <button *ngIf="isGuest" mat-button (click)="login()">Iniciar sesión</button>
+      <button *ngIf="isGuest" mat-button (click)="registrarse()">Registrarse</button>
+
+      <button *ngIf="!isGuest" mat-button (click)="Cesta()">Cesta</button>
+      <button *ngIf="!isGuest" mat-button (click)="editName()">Configuración</button>
+
+      <button *ngIf="!isGuest" mat-button (click)="logout()">Cerrar sesión</button>
+    </div>
   </div>
-<div [ngClass]="{'menu-visible': menuVisible}" class="dropdown-menu">
-  <p><strong>{{ userName }}</strong></p>
-  <p>{{ userEmail }}</p>
-
-  <!-- Mostrar "Iniciar sesión" si está en modo invitado -->
-  <button *ngIf="isGuest" mat-button (click)="login()">Iniciar sesión</button>
-    <button *ngIf="isGuest" mat-button (click)="registrarse()">Registrarse</button>
-
-
-  <!-- Mostrar "Configuración" si está autenticado -->
-  <button *ngIf="!isGuest" mat-button (click)="Cesta()">Cesta</button>
-    <button *ngIf="!isGuest" mat-button (click)="editName()">Configuración</button>
-
-
-  <!-- Mostrar "Cerrar sesión" solo si el usuario está autenticado -->
-  <button *ngIf="!isGuest" mat-button (click)="logout()">Cerrar sesión</button>
-</div>
-  
-  
-  
 </nav>
-

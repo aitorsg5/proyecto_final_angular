@@ -1,55 +1,228 @@
-form {
-  max-width: 400px;
-  margin: 20px auto;
-  padding: 20px;
-  background: #f9f9f9;
+/* Base Styles */
+:host {
+  display: block;
+  font-family: 'Audi Type', Arial, sans-serif; /* Use a clean sans-serif font, mock Audi Type if not loaded */
+  color: #333;
+  background-color: #f8f8f8; /* Light background */
+}
+
+.config-container {
+  max-width: 1200px;
+  margin: 40px auto; /* Center with vertical spacing */
+  background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding: 30px;
+  display: flex;
+  flex-direction: column; /* Stack on mobile by default */
+  gap: 30px; /* Space between sections */
+}
 
-  label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 600;
-    color: #333;
-  }
+/* Loading and Error States */
+.loading-state,
+.error-state {
+  text-align: center;
+  padding: 50px 20px;
+  font-size: 1.2em;
+  color: #666;
+  border: 1px dashed #ccc;
+  border-radius: 5px;
+  background-color: #fefefe;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
 
-  select {
-    width: 100%;
-    padding: 8px 10px;
-    margin-bottom: 16px;
-    border: 1.5px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-
-    &:focus {
-      border-color: #007bff;
-      outline: none;
-      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    }
+  p {
+    margin-bottom: 20px;
+    color: #d9534f; /* Red for error message */
+    font-weight: bold;
   }
 
   button {
-    width: 100%;
-    background-color: #007bff;
-    color: white;
+    background-color: #333;
+    color: #fff;
     border: none;
-    padding: 12px;
-    font-size: 1.1rem;
-    border-radius: 6px;
+    padding: 12px 25px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
 
     &:hover {
-      background-color: #0056b3;
+      background-color: #555;
     }
   }
 }
 
-div[ngIf] {
-  max-width: 400px;
-  margin: 10px auto;
+/* Form Layout */
+.config-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.config-header {
   text-align: center;
-  font-weight: 600;
-  color: #555;
+  margin-bottom: 20px;
+
+  h1 {
+    font-size: 2.5em;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+    font-weight: 600; /* Slightly bolder */
+  }
+
+  .base-price {
+    font-size: 1.3em;
+    color: #555;
+    font-weight: bold;
+  }
+}
+
+.config-main-content {
+  display: flex;
+  flex-direction: column; /* Stack image and options on small screens */
+  gap: 40px;
+}
+
+/* Image Section */
+.config-image-gallery {
+  flex: 1; /* Take available space */
+  text-align: center; /* Center image */
+
+  .main-car-image {
+    width: 100%;
+    max-width: 600px; /* Max width for image to prevent excessive stretching */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    object-fit: cover; /* Ensure image fits */
+  }
+}
+
+/* Options Section */
+.config-options {
+  flex: 1; /* Take available space */
+  display: flex;
+  flex-direction: column;
+  gap: 25px; /* Spacing between option groups */
+  padding: 0 15px; /* Some internal padding */
+
+  .option-group {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      font-size: 1.1em;
+      color: #333;
+      margin-bottom: 8px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .custom-select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+      font-size: 1em;
+      color: #333;
+      appearance: none; /* Remove default browser styling for select */
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* Custom arrow */
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      cursor: pointer;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+      &:focus {
+        outline: none;
+        border-color: #000; /* Black border on focus */
+        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+}
+
+/* Save Button */
+.save-button {
+  display: block; /* Make it block level for full width */
+  width: 100%;
+  padding: 15px 30px;
+  background-color: #000; /* Black button */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  margin-top: 20px; /* Space above button */
+
+  &:hover {
+    background-color: #333; /* Darker grey on hover */
+    transform: translateY(-2px); /* Slight lift */
+  }
+
+  &:active {
+    transform: translateY(0); /* Press effect */
+  }
+}
+
+
+/* Media Queries for Responsiveness */
+@media (min-width: 768px) {
+  .config-container {
+    padding: 50px;
+  }
+
+  .config-header {
+    h1 {
+      font-size: 3em; /* Larger title on desktop */
+    }
+    .base-price {
+      font-size: 1.5em;
+    }
+  }
+
+  .config-main-content {
+    flex-direction: row; /* Side-by-side for image and options */
+    align-items: flex-start; /* Align sections to the top */
+  }
+
+  .config-image-gallery {
+    flex: 2; /* Image takes more space */
+    max-width: 60%; /* Ensure image doesn't stretch too much */
+  }
+
+  .config-options {
+    flex: 1; /* Options take less space, but still fill */
+    padding: 0 0 0 30px; /* Add left padding to options for separation */
+    border-left: 1px solid #eee; /* Subtle separator line */
+  }
+}
+
+@media (max-width: 767px) {
+  .config-container {
+    padding: 20px;
+    margin: 20px auto;
+  }
+
+  .config-header {
+    h1 {
+      font-size: 2em;
+    }
+    .base-price {
+      font-size: 1.1em;
+    }
+  }
+
+  .config-image-gallery .main-car-image {
+    max-width: 100%;
+  }
+
+  .config-options {
+    padding: 0;
+  }
 }

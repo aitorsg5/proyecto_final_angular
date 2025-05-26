@@ -1,24 +1,52 @@
-<div *ngIf="loading">Cargando...</div>
-<div *ngIf="error">{{ error }}</div>
+<div class="config-container">
+  <div *ngIf="loading" class="loading-state">Cargando configuración del coche...</div>
+  <div *ngIf="error" class="error-state">
+    <p>{{ error }}</p>
+    <button  routerLink="/coches">Volver a la lista de coches</button>
+  </div>
 
-<form *ngIf="!loading && !error" [formGroup]="form" (ngSubmit)="guardar()">
-  <h2>Configuración del coche: {{ coche.nombre }}</h2>
-  <img [src]="coche.imagenes_ruta && coche.imagenes_ruta.length > 0 ? coche.imagenes_ruta[0] : 'assets/default.jpg'" alt="{{ coche.nombre }}" />
+  <form *ngIf="!loading && !error && coche" [formGroup]="form" (ngSubmit)="guardar()" class="config-form">
+    <div class="config-header">
+      <h1>{{ coche.nombre }}</h1>
+      <p class="base-price">Precio base: {{ coche.precio_total | currency:'EUR' }}</p>
+    </div>
 
-  <label for="kit">Kit:</label>
-  <select formControlName="kit_id" id="kit">
-    <option *ngFor="let kit of kits" [value]="kit.id">{{ kit.paquete }}</option>
-  </select>
+    <div class="config-main-content">
+      <div class="config-image-gallery">
+        <img
+          [src]="coche.imagenes_ruta && coche.imagenes_ruta.length > 0 ? coche.imagenes_ruta[0] : 'assets/default.jpg'"
+          alt="{{ coche.nombre }}"
+          class="main-car-image"
+        />
+        </div>
 
-  <label for="caja">Caja:</label>
-  <select formControlName="caja_id" id="caja">
-    <option *ngFor="let caja of cajas" [value]="caja.id">{{ caja.tipo }}</option>
-  </select>
+      <div class="config-options">
+        <div class="option-group">
+          <label for="kit">Kit:</label>
+          <select formControlName="kit_id" id="kit" class="custom-select">
+            <option [value]="null" disabled selected>Selecciona un Kit</option>
+            <option *ngFor="let kit of kits" [value]="kit.id">{{ kit.paquete }}</option>
+          </select>
+        </div>
 
-  <label for="motor">Motor:</label>
-  <select formControlName="motor_id" id="motor">
-    <option *ngFor="let motor of motores" [value]="motor.id">{{ motor.motor }}</option>
-  </select>
+        <div class="option-group">
+          <label for="caja">Caja:</label>
+          <select formControlName="caja_id" id="caja" class="custom-select">
+            <option [value]="null" disabled selected>Selecciona una Caja</option>
+            <option *ngFor="let caja of cajas" [value]="caja.id">{{ caja.tipo }}</option>
+          </select>
+        </div>
 
-  <button type="submit">Guardar cambios</button>
-</form>
+        <div class="option-group">
+          <label for="motor">Motor:</label>
+          <select formControlName="motor_id" id="motor" class="custom-select">
+            <option [value]="null" disabled selected>Selecciona un Motor</option>
+            <option *ngFor="let motor of motores" [value]="motor.id">{{ motor.motor }}</option>
+          </select>
+        </div>
+
+        <button type="submit" class="save-button">Añadir al Carrito</button>
+      </div>
+    </div>
+  </form>
+</div>

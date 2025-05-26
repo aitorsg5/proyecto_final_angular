@@ -11,7 +11,7 @@ export class CestaService {
   private apiUrlpost = 'http://127.0.0.1:8000/api/cestas_post';
   private apiUrlupdate = 'http://127.0.0.1:8000/api/cestas/{id}';
   private apiUrlget = 'http://127.0.0.1:8000/api/cestas_get/{id}';
-    private apiUrlgetdelet = 'http://127.0.0.1:8000/api/cestas_delet/{id}';
+private apiUrlDelete = 'http://127.0.0.1:8000/api/cestas_delet';
 
 
 
@@ -41,6 +41,6 @@ export class CestaService {
 
   // Eliminar una cesta
   deleteCesta(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrlgetdelet}/${id}`);
+    return this.http.delete<void>(`${this.apiUrlDelete}/${id}`);
   }
 }

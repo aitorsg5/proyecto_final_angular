@@ -12,20 +12,26 @@
 <div *ngIf="!loading && !error && cestas.length > 0" class="cesta-container">
   <h2>Tu cesta</h2>
 
-  <div *ngFor="let cesta of cestas" class="cesta-card">
-    <img
-      [src]="cesta.coche?.imagenes_ruta?.[0] || 'assets/default.jpg'"
-      alt="Imagen del coche"
-    />
+<div *ngFor="let cesta of cestas" class="cesta-card">
+  <img
+  [src]="obtenerImagenCoche(cesta)"
+  alt="{{ cesta.coche?.nombre || 'Coche no disponible' }}"
+  class="main-car-image"
+/>
 
-    <div class="cesta-details">
-      <h3>{{ cesta.coche?.nombre || 'Coche no disponible' }}</h3>
-      <p><strong>Kit:</strong> {{ cesta.kit?.paquete || 'N/A' }}</p>
-      <p><strong>Caja:</strong> {{ cesta.caja?.tipo || 'N/A' }}</p>
-      <p><strong>Motor:</strong> {{ cesta.motor?.motor || 'N/A' }}</p>
-      <p class="price"><strong>Precio Total:</strong> {{ cesta.precio_total | currency:'EUR' }}</p>
-      <button *ngIf="cesta.id" (click)="eliminarCesta(cesta.id)">Eliminar</button>
-    </div>
+
+
+  <div class="cesta-details"  >
+    <h3>{{ cesta.coche?.nombre || 'Coche no disponible' }}</h3>
+    <p><strong>Kit:</strong> {{ cesta.kit?.paquete || 'N/A' }}</p>
+    <p><strong>Caja:</strong> {{ cesta.caja?.tipo || 'N/A' }}</p>
+    <p><strong>Motor:</strong> {{ cesta.motor?.motor || 'N/A' }}</p>
+    <p class="price"><strong>Precio Total:</strong> {{ cesta.precio_total | currency:'EUR' }}</p>
+    <button *ngIf="cesta.id" (click)="eliminarCesta(cesta.id)">Eliminar</button>
+        <button *ngIf="cesta.id" (click)="comprar(cesta.id)">Comprar</button>
+
   </div>
+</div>
+
 </div>
 <app-footer></app-footer>

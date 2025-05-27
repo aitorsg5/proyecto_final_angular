@@ -75,7 +75,8 @@ obtenerImagenCoche(cesta: Cesta): string {
 }
 
   comprar(id: number): void {
-  if (confirm('¿Estás seguro de que quieres eliminar esta cesta?')) {
+  if (confirm('¿Estás seguro de que quieres comprar el coche?')) {
+    
     this.cestaService.deleteCesta(id).subscribe({
       next: () => this.cargarCestas(),
       error: () => this.error = 'Error al eliminar la cesta'

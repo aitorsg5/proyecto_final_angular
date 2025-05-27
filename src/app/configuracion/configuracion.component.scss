@@ -5,7 +5,10 @@
   color: #333;
   background-color: #f8f8f8; /* Light background */
 }
-
+.primera-imagen {
+    width: 50%;
+    height: 50vh;
+}
 .config-container {
   max-width: 1200px;
   margin: 40px auto; /* Center with vertical spacing */
@@ -29,28 +32,32 @@
   border-radius: 5px;
   background-color: #fefefe;
   box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
-
-  p {
-    margin-bottom: 20px;
-    color: #d9534f; /* Red for error message */
-    font-weight: bold;
-  }
-
-  button {
-    background-color: #333;
-    color: #fff;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9em;
-    transition: background-color 0.2s ease;
-
-    &:hover {
-      background-color: #555;
-    }
-  }
 }
+
+.loading-state p,
+.error-state p { /* Corrected selector for nested p */
+  margin-bottom: 20px;
+  color: #d9534f; /* Red for error message */
+  font-weight: bold;
+}
+
+.loading-state button,
+.error-state button { /* Corrected selector for nested button */
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.2s ease;
+}
+
+.loading-state button:hover,
+.error-state button:hover { /* Corrected selector for nested button */
+  background-color: #555;
+}
+
 
 /* Form Layout */
 .config-form {
@@ -62,20 +69,21 @@
 .config-header {
   text-align: center;
   margin-bottom: 20px;
-
-  h1 {
-    font-size: 2.5em;
-    color: #1a1a1a;
-    margin-bottom: 10px;
-    font-weight: 600; /* Slightly bolder */
-  }
-
-  .base-price {
-    font-size: 1.3em;
-    color: #555;
-    font-weight: bold;
-  }
 }
+
+.config-header h1 { /* Corrected selector for nested h1 */
+  font-size: 2.5em;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+  font-weight: 600; /* Slightly bolder */
+}
+
+.config-header .base-price { /* Corrected selector for nested .base-price */
+  font-size: 1.3em;
+  color: #555;
+  font-weight: bold;
+}
+
 
 .config-main-content {
   display: flex;
@@ -87,16 +95,58 @@
 .config-image-gallery {
   flex: 1; /* Take available space */
   text-align: center; /* Center image */
-
-  .main-car-image {
-    width: 100%;
-    max-width: 600px; /* Max width for image to prevent excessive stretching */
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    object-fit: cover; /* Ensure image fits */
-  }
 }
+
+.config-image-gallery .main-car-image { /* Corrected selector for nested .main-car-image */
+  width: 100%;
+  max-width: 600px; /* Max width for image to prevent excessive stretching */
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  object-fit: cover; /* Ensure image fits */
+}
+
+/* Image Slider Controls */
+.image-slider-controls {
+  display: flex; /* Arrange items in a row */
+  justify-content: center; /* Center the buttons horizontally */
+  align-items: center; /* Vertically align items */
+  margin-top: 20px; /* Add some space above the controls */
+  gap: 15px; /* Space between the buttons and the text */
+  margin-bottom: 20px; /* Add space below the controls */
+}
+
+/* Styles for the slider buttons */
+.image-slider-controls button {
+  background-color: #007bff; /* A nice blue background */
+  color: white; /* White text color */
+  border: none; /* No border */
+  padding: 10px 20px; /* Comfortable padding */
+  border-radius: 5px; /* Slightly rounded corners */
+  cursor: pointer; /* Indicate it's clickable */
+  font-size: 16px; /* Larger font size */
+  transition: background-color 0.3s ease, transform 0.1s ease; /* Smooth transition on hover and active */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+/* Hover effect for the buttons */
+.image-slider-controls button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: translateY(-2px); /* Slight lift */
+}
+
+/* Active (press) effect for the buttons */
+.image-slider-controls button:active {
+  transform: translateY(0); /* Press effect */
+}
+
+/* Styles for the current image index display */
+.image-slider-controls span {
+  font-size: 18px; /* Larger font for the count */
+  font-weight: bold; /* Make it bold */
+  color: #333; /* Darker text color */
+}
+
 
 /* Options Section */
 .config-options {
@@ -105,44 +155,44 @@
   flex-direction: column;
   gap: 25px; /* Spacing between option groups */
   padding: 0 15px; /* Some internal padding */
+}
 
-  .option-group {
-    display: flex;
-    flex-direction: column;
+.config-options .option-group { /* Corrected selector for nested .option-group */
+  display: flex;
+  flex-direction: column;
+}
 
-    label {
-      font-size: 1.1em;
-      color: #333;
-      margin-bottom: 8px;
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
+.config-options .option-group label { /* Corrected selector for nested label */
+  font-size: 1.1em;
+  color: #333;
+  margin-bottom: 8px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
 
-    .custom-select {
-      width: 100%;
-      padding: 12px 15px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      background-color: #fff;
-      font-size: 1em;
-      color: #333;
-      appearance: none; /* Remove default browser styling for select */
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* Custom arrow */
-      background-repeat: no-repeat;
-      background-position: right 10px center;
-      cursor: pointer;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+.config-options .option-group .custom-select { /* Corrected selector for nested .custom-select */
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 1em;
+  color: #333;
+  appearance: none; /* Remove default browser styling for select */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* Custom arrow */
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
 
-      &:focus {
-        outline: none;
-        border-color: #000; /* Black border on focus */
-        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
-      }
-    }
-  }
+.config-options .option-group .custom-select:focus { /* Corrected selector for nested .custom-select */
+  outline: none;
+  border-color: #000; /* Black border on focus */
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
 }
 
 /* Save Button */
@@ -159,15 +209,15 @@
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.1s ease;
   margin-top: 20px; /* Space above button */
+}
 
-  &:hover {
-    background-color: #333; /* Darker grey on hover */
-    transform: translateY(-2px); /* Slight lift */
-  }
+.save-button:hover {
+  background-color: #333; /* Darker grey on hover */
+  transform: translateY(-2px); /* Slight lift */
+}
 
-  &:active {
-    transform: translateY(0); /* Press effect */
-  }
+.save-button:active {
+  transform: translateY(0); /* Press effect */
 }
 
 
@@ -177,13 +227,11 @@
     padding: 50px;
   }
 
-  .config-header {
-    h1 {
-      font-size: 3em; /* Larger title on desktop */
-    }
-    .base-price {
-      font-size: 1.5em;
-    }
+  .config-header h1 { /* Corrected selector */
+    font-size: 3em; /* Larger title on desktop */
+  }
+  .config-header .base-price { /* Corrected selector */
+    font-size: 1.5em;
   }
 
   .config-main-content {
@@ -209,16 +257,14 @@
     margin: 20px auto;
   }
 
-  .config-header {
-    h1 {
-      font-size: 2em;
-    }
-    .base-price {
-      font-size: 1.1em;
-    }
+  .config-header h1 { /* Corrected selector */
+    font-size: 2em;
+  }
+  .config-header .base-price { /* Corrected selector */
+    font-size: 1.1em;
   }
 
-  .config-image-gallery .main-car-image {
+  .config-image-gallery .main-car-image { /* Corrected selector */
     max-width: 100%;
   }
 

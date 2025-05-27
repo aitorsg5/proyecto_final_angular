@@ -31,6 +31,9 @@ export class PerfilComponent implements OnInit {
 actualizarPerfil(): void {
   this.usuarioService.updateUsuario(this.usuarioActual).subscribe({
     next: (response) => {
+      alert("Usuario actualizado")
+        this.router.navigate(['/']); // o la ruta que quieras
+
       console.log('Usuario actualizado:', response);
       localStorage.setItem('currentUser', JSON.stringify(response));
       this.usuarioService.setCurrentUser(response);

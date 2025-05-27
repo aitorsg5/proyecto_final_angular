@@ -4,6 +4,8 @@ import { Cesta } from '../models/cesta';
 import { CocheService } from '../services/coche.service';
 import { Coche } from '../models/coche';
 import { Router } from '@angular/router';
+import { UsuarioService } from '../services/usuario.service';
+import { Subscription } from 'rxjs'; // 👈 Añade esta importación
 
 @Component({
   selector: 'app-cesta',
@@ -16,16 +18,34 @@ export class CestaComponent implements OnInit {
   error = '';
   baseImageUrl: string;
     coche!: Coche;
+  userName: string = '';
+  userEmail: string = '';
+  isGuest: boolean = true;
+private userSubscription: Subscription | undefined;
 
-
-  constructor(private cestaService: CestaService, private cocheService: CocheService,private router: Router) {
+  constructor(private cestaService: CestaService, private cocheService: CocheService,private router: Router, private userService: UsuarioService,) {
         this.baseImageUrl = this.cocheService.baseImageUrl;
 
   }
-
-  ngOnInit(): void {
-    this.cargarCestas();
+    ngOnInit(): void {
+    this.userSubscription = this.userService.currentUser.subscribe(usuario => {
+      if (usuario) {
+        this.userName = usuario.name;
+        this.userEmail = usuario.email;
+        this.isGuest = false;
+            this.cargarCestas();
+      } else {
+        this.modoinvitado();
+      }
+    });
   }
+
+ modoinvitado(): void {
+    
+    console.log("Modo invitado activado. Limitando funcionalidades...");
+     this.router.navigate(['/']);
+  }
+
 
   cargarCestas(): void {
     this.loading = true;

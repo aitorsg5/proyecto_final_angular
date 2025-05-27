@@ -47,7 +47,7 @@
           <label for="caja">Caja:</label>
           <select formControlName="caja_id" id="caja" class="custom-select">
             <option [value]="null" disabled selected>Selecciona una Caja</option>
-            <option *ngFor="let caja of cajas" [value]="caja.id">{{ caja.tipo }}</option>
+            <option *ngFor="let caja of cajas" [value]="caja.id">{{ caja.tipo }}  {{ caja.traccion }}</option>
           </select>
         </div>
 
@@ -55,7 +55,7 @@
           <label for="motor">Motor:</label>
           <select formControlName="motor_id" id="motor" class="custom-select">
             <option [value]="null" disabled selected>Selecciona un Motor</option>
-            <option *ngFor="let motor of motores" [value]="motor.id">{{ motor.motor }}</option>
+            <option *ngFor="let motor of motores" [value]="motor.id">{{ motor.motor }} {{ motor.combustible }}</option>
           </select>
         </div>
 
